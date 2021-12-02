@@ -1,0 +1,26 @@
+stages:
+  - build
+  - publish
+
+build-code-job:
+  image: ${CI_REGISTRY}/ci-runner-images/ci-docker-images/ddi-yarn:master
+  stage: build
+  artifacts:
+    paths:
+      - dist/
+  script:
+    - CI="false"  # Prevent warnings from being treated as errors
+    - cd mlflow/server/js
+    - npm install && npm run build
+    - cd ../../..
+    - python setup.py bdist_wheel
+
+publish-code-job:
+  image: ${CI_REGISTRY}/ci-runner-images/ci-docker-images/ddi-yarn:master
+  stage: publish
+  script:
+    - pip install twine
+    - REPO_URL=https://${SERVER_INT_FQDN}/api/v4/projects/${CI_PROJECT_ID}/packages/pypi
+    - TWINE_PASSWORD=${CI_JOB_TOKEN} 
+    - TWINE_USERNAME=gitlab-ci-token 
+    - python -m twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD --repository-url $REPO_URL dist/*
