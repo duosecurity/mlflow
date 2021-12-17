@@ -55,7 +55,6 @@ Suggests:
     h2o,
     keras,
     lintr,
-    mleap,
     sparklyr,
     stringi (< 1.4.4),
     testthat (>= 2.0.0),
@@ -76,7 +75,6 @@ Collate:
     'model-utils.R'
     'model-h2o.R'
     'model-keras.R'
-    'model-mleap.R'
     'model-registry.R'
     'model-serve.R'
     'model-swagger.R'
