@@ -2,14 +2,15 @@
 
 name: Release-note category
 
-on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - labeled
-      - unlabeled
+# don't require release notes for PRs in our fork
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - synchronize
+#       - reopened
+#       - labeled
+#       - unlabeled
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/master' && github.run_number || github.ref }}
