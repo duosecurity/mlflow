@@ -24,9 +24,10 @@ on:
         description: "[Optional] Comma-separated string specifying which versions to test (e.g. '1.2.3, 4.5.6'). If unspecified, all versions are tested."
         required: false
         default: ""
-  schedule:
-    # Run this workflow daily at 7:00 UTC
-    - cron: "0 7 * * *"
+# don't run daily for our fork
+#   schedule:
+#     # Run this action daily at 7:00 UTC
+#     - cron: "0 7 * * *"
   pull_request:
     branches:
       - master
