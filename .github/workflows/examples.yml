@@ -3,9 +3,10 @@ name: Examples
 on:
   pull_request:
     branches: [ master ]
-  schedule:
-    # Run this action daily at 7:00 UTC
-    - cron: "0 7 * * *"
+# don't run daily for our fork
+#   schedule:
+#     # Run this action daily at 7:00 UTC
+#     - cron: "0 7 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/master' && github.run_number || github.ref }}
